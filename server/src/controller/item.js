@@ -35,3 +35,15 @@ exports.showAll = (req, res) => {
             console.log(err);
         });
 };
+
+exports.showOne = (req, res) => {
+    const _id = req.params.id;
+
+    Item.findById({ _id })
+        .then((result) => {
+            return res.status(200).json({ result });
+        })
+        .catch(() => {
+            return res.status(400).json({ err: "Somthing went wrong" });
+        });
+};
