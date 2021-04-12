@@ -25,3 +25,13 @@ exports.add = (req, res) => {
             return res.status(400).json({ msg: err.message });
         });
 };
+
+exports.showAll = (req, res) => {
+    Item.find()
+        .then((result) => {
+            return res.status(200).json({ result });
+        })
+        .catch((err) => {
+            console.log(err);
+        });
+};
