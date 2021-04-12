@@ -9,6 +9,7 @@ app.use(cors());
 app.use(express.json());
 
 const authRouter = require("./router/auth");
+const itemRouter = require("./router/item");
 
 const port = process.env.PORT;
 
@@ -17,6 +18,7 @@ app.get("/", (req, res) => {
 });
 
 app.use("/api/users", authRouter);
+app.use("/api/item", itemRouter);
 
 app.listen(port, () =>
     mongoose.connect(

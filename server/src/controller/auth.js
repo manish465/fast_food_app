@@ -53,10 +53,10 @@ exports.signUp = (req, res) => {
         _user
             .save()
             .then(() => {
-                res.status(201).json({ msg: "Sign up Complete" });
+                return res.status(201).json({ msg: "Sign up Complete" });
             })
             .catch((err) => {
-                res.status(400).json({ msg: err.message });
+                return res.status(400).json({ msg: err.message });
             });
     });
 };
