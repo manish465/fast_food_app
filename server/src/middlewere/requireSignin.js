@@ -20,6 +20,7 @@ module.exports = (req, res, next) => {
         User.findById(_id).then((user) => {
             user.hash_password = undefined;
             req.user = user;
+            console.log(user.roles);
             next();
         });
     });
