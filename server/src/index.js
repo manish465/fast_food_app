@@ -8,11 +8,15 @@ dotenv.config();
 app.use(cors());
 app.use(express.json());
 
+const authRouter = require("./router/auth");
+
 const port = process.env.PORT;
 
 app.get("/", (req, res) => {
-    res.send("Hello world");
+    res.send("Welcome To Fast Food Delivery Service");
 });
+
+app.use("/api/users", authRouter);
 
 app.listen(port, () =>
     mongoose.connect(
