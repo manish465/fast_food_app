@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { PrimaryCard } from "./index";
+import { PrimaryCard } from "./";
 
 const Container = styled.div`
     padding: 5px 10px;

@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { SecondaryCard } from "./";
 
 const Container = styled.div`
     padding: 5px 10px;
@@ -18,8 +19,10 @@ const ContainerCards = styled.div`
 const PopularContainer = () => {
     return (
         <Container>
-            <ContainerHeader>Treanding Today</ContainerHeader>
-            <ContainerCards>asbcj</ContainerCards>
+            <ContainerHeader>Popular Order</ContainerHeader>
+            <ContainerCards>
+                <SecondaryCard />
+            </ContainerCards>
         </Container>
     );
 };
