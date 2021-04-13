@@ -13,11 +13,11 @@ import {
 const App = () => {
     return (
         <Switch>
-            <Route path='/add'>
-                <AddProduct />
-            </Route>
             <Route path='/' exact>
                 <Home />
+            </Route>
+            <Route path='/add'>
+                <AddProduct />
             </Route>
             <Route path='/product'>
                 <Product />
