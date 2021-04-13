@@ -32,7 +32,7 @@ const SignIn = () => {
                     <TextBox placeholder='Enter Password' />
                     <SizedBox height='15px' />
                     <FlexRow space_between>
-                        <Button>Sign In</Button>
+                        <Button primary>Sign In</Button>
                         <Button>Sign In</Button>
                     </FlexRow>
                 </FlexColoumn>

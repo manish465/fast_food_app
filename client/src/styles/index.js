@@ -37,9 +37,12 @@ export const TextBox = styled.input`
 `;
 
 export const Button = styled.button`
-    border: none;
-    background-color: ${({ theme }) => theme.colors.primaryColor};
-    color: ${({ theme }) => theme.colors.secondaryColor};
+    border: ${({ theme, primary }) =>
+        primary ? "none" : `3px solid ${theme.colors.primaryColor}`};
+    background-color: ${({ theme, primary }) =>
+        primary ? theme.colors.primaryColor : "transparent"};
+    color: ${({ theme, primary }) =>
+        primary ? theme.colors.secondaryColor : theme.colors.primaryColor};
     padding: 10px 20px;
     border-radius: 30px;
     cursor: pointer;
