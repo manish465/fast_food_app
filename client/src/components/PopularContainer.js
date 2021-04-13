@@ -1,5 +1,4 @@
 import styled from "styled-components";
-import { PrimaryCard } from "./index";
 
 const Container = styled.div`
     padding: 5px 10px;
@@ -16,15 +15,13 @@ const ContainerCards = styled.div`
     flex-wrap: wrap;
 `;
 
-const TrendingContainer = () => {
+const PopularContainer = () => {
     return (
         <Container>
             <ContainerHeader>Treanding Today</ContainerHeader>
-            <ContainerCards>
-                <PrimaryCard />
-            </ContainerCards>
+            <ContainerCards>asbcj</ContainerCards>
         </Container>
     );
 };
 
-export default TrendingContainer;
+export default PopularContainer;
