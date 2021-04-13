@@ -21,6 +21,17 @@ const Heading = styled.h1`
     color: ${({ theme }) => theme.colors.primaryColor};
 `;
 
+const Select = styled.select`
+    padding: 10px 30px;
+    border: none;
+    border-radius: 5px;
+    background-color: ${({ theme }) => theme.colors.accentColor};
+    box-shadow: ${({ theme }) => theme.shadow.default};
+    &:focus {
+        outline: none;
+    }
+`;
+
 const SignUp = () => {
     return (
         <MainContainer>
@@ -38,6 +49,11 @@ const SignUp = () => {
                     <TextBox placeholder='Enter Address' />
                     <SizedBox height='15px' />
                     <TextBox placeholder='Enter Phone' />
+                    <SizedBox height='15px' />
+                    <Select>
+                        <option>Admin</option>
+                        <option>User</option>
+                    </Select>
                     <SizedBox height='15px' />
                     <FlexRow space_between>
                         <Button primary>Sign Up</Button>
