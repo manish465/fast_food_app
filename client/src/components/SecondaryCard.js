@@ -1,7 +1,8 @@
+import { useState } from "react";
 import styled from "styled-components";
 import fastFood from "../assets/images/fast-food.jpg";
 import { FlexColoumn } from "../styles";
-import { add } from "../assets/svg";
+import { add, done } from "../assets/svg";
 
 const ContainerCard = styled.div`
     width: 220px;
@@ -56,14 +57,20 @@ const ContainerCardButtonIcon = styled.img`
 `;
 
 const SecondaryCard = () => {
+    const [buttonContent, setButtonContent] = useState(add);
     return (
         <ContainerCard>
             <ContainerCardImage src={fastFood} />
             <FlexColoumn>
                 <ContainerCardName>Cheeseburger</ContainerCardName>
                 <ContainerCardPrice>$61.32</ContainerCardPrice>
-                <ContainerCardButton>
-                    <ContainerCardButtonIcon src={add} />
+                <ContainerCardButton
+                    onClick={() =>
+                        setButtonContent((prevState) =>
+                            prevState === add ? done : add,
+                        )
+                    }>
+                    <ContainerCardButtonIcon src={buttonContent} />
                 </ContainerCardButton>
             </FlexColoumn>
         </ContainerCard>

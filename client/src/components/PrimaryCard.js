@@ -1,3 +1,4 @@
+import { useState } from "react";
 import styled from "styled-components";
 import fastFood from "../assets/images/fast-food.jpg";
 import { FlexColoumn } from "../styles";
@@ -56,6 +57,8 @@ const ContainerCardButton = styled.button`
 `;
 
 const PrimaryCard = () => {
+    const [buttonContent, setButtonContent] = useState("ADD");
+
     return (
         <ContainerCard>
             <ContainerCardImage src={fastFood} />
@@ -67,7 +70,14 @@ const PrimaryCard = () => {
                     From T-sub
                 </ContainerCardRestaurantName>
                 <ContainerCardPrice>$45.99</ContainerCardPrice>
-                <ContainerCardButton>ADD</ContainerCardButton>
+                <ContainerCardButton
+                    onClick={() =>
+                        setButtonContent((prevState) =>
+                            prevState === "ADD" ? "DONE" : "ADD",
+                        )
+                    }>
+                    {buttonContent}
+                </ContainerCardButton>
             </FlexColoumn>
         </ContainerCard>
     );
