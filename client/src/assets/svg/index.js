@@ -4,5 +4,6 @@ import add from "./add.svg";
 import foods from "./foods.svg";
 import logo from "./Logo.svg";
 import done from "./done.svg";
+import edit from "./edit.svg";
 
-export { bell, add, foods, cart, logo, done };
+export { bell, add, foods, cart, logo, done, edit };
