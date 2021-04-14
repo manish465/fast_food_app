@@ -31,7 +31,7 @@ const App = () => {
             <Route path='/sign-up'>
                 <SignUp />
             </Route>
-            <Route path='single-product'>
+            <Route path='/single-product'>
                 <SingleProduct />
             </Route>
         </Switch>
