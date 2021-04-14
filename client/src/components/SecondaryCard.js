@@ -1,8 +1,8 @@
-import { useState } from "react";
 import styled from "styled-components";
 import fastFood from "../assets/images/fast-food.jpg";
 import { FlexColoumn } from "../styles";
-import { add, done } from "../assets/svg";
+import { add } from "../assets/svg";
+import { ChangePage } from "../styles";
 
 const ContainerCard = styled.div`
     width: 220px;
@@ -57,20 +57,16 @@ const ContainerCardButtonIcon = styled.img`
 `;
 
 const SecondaryCard = () => {
-    const [buttonContent, setButtonContent] = useState(add);
     return (
         <ContainerCard>
-            <ContainerCardImage src={fastFood} />
+            <ChangePage to='/product/1233'>
+                <ContainerCardImage src={fastFood} />
+            </ChangePage>
             <FlexColoumn>
                 <ContainerCardName>Cheeseburger</ContainerCardName>
                 <ContainerCardPrice>$61.32</ContainerCardPrice>
-                <ContainerCardButton
-                    onClick={() =>
-                        setButtonContent((prevState) =>
-                            prevState === add ? done : add,
-                        )
-                    }>
-                    <ContainerCardButtonIcon src={buttonContent} />
+                <ContainerCardButton>
+                    <ContainerCardButtonIcon src={add} />
                 </ContainerCardButton>
             </FlexColoumn>
         </ContainerCard>

@@ -1,4 +1,3 @@
-import { useState } from "react";
 import styled from "styled-components";
 import { NavBar } from "../components";
 import { Padding, SizedBox } from "../styles";
@@ -63,7 +62,6 @@ const ProductButton = styled.button`
 `;
 
 const SingleProduct = () => {
-    const [buttonContent, setButtonContent] = useState("ADD");
     return (
         <>
             <NavBar />
@@ -81,14 +79,7 @@ const SingleProduct = () => {
                         starDimension='30px'
                     />
                     <SizedBox height='15px' />
-                    <ProductButton
-                        onClick={() =>
-                            setButtonContent((prevState) =>
-                                prevState === "ADD" ? "DONE" : "ADD",
-                            )
-                        }>
-                        {buttonContent}
-                    </ProductButton>
+                    <ProductButton>ADD</ProductButton>
                     <SizedBox height='15px' />
                     <ProductDescription>
                         Lorem ipsum, dolor sit amet consectetur adipisicing

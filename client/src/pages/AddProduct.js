@@ -1,7 +1,7 @@
 import { useState } from "react";
 import styled from "styled-components";
 import { NavBar } from "../components";
-import { FlexColoumn, Padding, TextBox, SizedBox } from "../styles";
+import { FlexColoumn, Padding, TextBox, SizedBox, ChangePage } from "../styles";
 import deafultIMG from "../assets/images/fast-food.jpg";
 
 const MainContainer = styled.div`
@@ -107,7 +107,9 @@ const AddProduct = () => {
                         <SizedBox height='15px' />
                         <TextBox placeholder='Enter Rating' />
                         <SizedBox height='25px' />
-                        <SaveButton>SAVE</SaveButton>
+                        <ChangePage to='/'>
+                            <SaveButton>SAVE</SaveButton>
+                        </ChangePage>
                     </FlexColoumn>
                 </Padding>
             </MainContainer>

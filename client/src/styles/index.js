@@ -1,6 +1,7 @@
 import styled from "styled-components";
 import GlobalStyle from "./globalStyles";
 import theme from "./theme";
+import { Link } from "react-router-dom";
 
 export const Padding = styled.div`
     padding: ${({ padding }) => padding};
@@ -54,6 +55,11 @@ export const Button = styled.button`
 export const SizedBox = styled.div`
     height: ${({ height }) => (height ? height : "0")};
     width: ${({ width }) => (width ? width : "0")};
+`;
+
+export const ChangePage = styled(Link)`
+    font-style: none;
+    color: transparent;
 `;
 
 export { GlobalStyle, theme };

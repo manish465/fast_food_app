@@ -6,6 +6,7 @@ import {
     SizedBox,
     Button,
     FlexRow,
+    ChangePage,
 } from "../styles";
 
 const MainContainer = styled.div`
@@ -32,8 +33,12 @@ const SignIn = () => {
                     <TextBox placeholder='Enter Password' />
                     <SizedBox height='15px' />
                     <FlexRow space_between>
-                        <Button primary>Sign In</Button>
-                        <Button>Sign In</Button>
+                        <ChangePage to='/'>
+                            <Button primary>Sign In</Button>
+                        </ChangePage>
+                        <ChangePage to='/sign-up'>
+                            <Button>Sign Up</Button>
+                        </ChangePage>
                     </FlexRow>
                 </FlexColoumn>
             </Padding>

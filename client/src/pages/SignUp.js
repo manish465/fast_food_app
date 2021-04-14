@@ -8,6 +8,7 @@ import {
     SizedBox,
     Button,
     FlexRow,
+    ChangePage,
 } from "../styles";
 
 import deafultIMG from "../assets/images/profile.jpg";
@@ -99,8 +100,12 @@ const SignUp = () => {
                     </Select>
                     <SizedBox height='15px' />
                     <FlexRow space_between>
-                        <Button primary>Sign Up</Button>
-                        <Button>Sign In</Button>
+                        <ChangePage to='/sign-in'>
+                            <Button primary>Sign Up</Button>
+                        </ChangePage>
+                        <ChangePage to='/sign-in'>
+                            <Button>Sign In</Button>
+                        </ChangePage>
                     </FlexRow>
                 </FlexColoumn>
             </Padding>

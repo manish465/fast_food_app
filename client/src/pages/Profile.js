@@ -1,7 +1,14 @@
 import { useState } from "react";
 import styled from "styled-components";
 import { NavBar } from "../components";
-import { FlexColoumn, Padding, SizedBox, TextBox, Button } from "../styles";
+import {
+    FlexColoumn,
+    Padding,
+    SizedBox,
+    TextBox,
+    Button,
+    ChangePage,
+} from "../styles";
 import deafultIMG from "../assets/images/profile.jpg";
 import { edit } from "../assets/svg";
 
@@ -144,7 +151,9 @@ const Profile = () => {
                         />
                     </Info>
                     <SizedBox height='35px' />
-                    <SignOutButton>Sign Out</SignOutButton>
+                    <ChangePage to='/sign-in'>
+                        <SignOutButton>Sign Out</SignOutButton>
+                    </ChangePage>
                 </FlexColoumn>
             </Padding>
         </>

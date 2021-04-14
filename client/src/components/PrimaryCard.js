@@ -1,7 +1,7 @@
-import { useState } from "react";
 import styled from "styled-components";
 import fastFood from "../assets/images/fast-food.jpg";
 import { FlexColoumn } from "../styles";
+import { ChangePage } from "../styles";
 
 const ContainerCard = styled.div`
     width: 400px;
@@ -57,11 +57,11 @@ const ContainerCardButton = styled.button`
 `;
 
 const PrimaryCard = () => {
-    const [buttonContent, setButtonContent] = useState("ADD");
-
     return (
         <ContainerCard>
-            <ContainerCardImage src={fastFood} />
+            <ChangePage to='/product/1233'>
+                <ContainerCardImage src={fastFood} />
+            </ChangePage>
             <FlexColoumn>
                 <ContainerCardName>
                     Quiznos Turkey Bacon Guacamole sub
@@ -70,14 +70,7 @@ const PrimaryCard = () => {
                     From T-sub
                 </ContainerCardRestaurantName>
                 <ContainerCardPrice>$45.99</ContainerCardPrice>
-                <ContainerCardButton
-                    onClick={() =>
-                        setButtonContent((prevState) =>
-                            prevState === "ADD" ? "DONE" : "ADD",
-                        )
-                    }>
-                    {buttonContent}
-                </ContainerCardButton>
+                <ContainerCardButton>ADD</ContainerCardButton>
             </FlexColoumn>
         </ContainerCard>
     );

@@ -1,6 +1,7 @@
 import styled, { css } from "styled-components";
 import { add, bell, cart, foods, logo } from "../assets/svg";
 import profilePic from "../assets/images/profile.jpg";
+import { ChangePage } from "../styles";
 
 const Nav = styled.div`
     height: 50px;
@@ -40,13 +41,25 @@ const NavBar = () => {
     return (
         <Nav>
             <Toolbar>
-                <Logo src={logo} />
+                <ChangePage to='/'>
+                    <Logo src={logo} />
+                </ChangePage>
                 <Pages>
-                    <Page src={foods} />
-                    <Page src={bell} />
-                    <Page src={cart} />
-                    <Page src={profilePic} account />
-                    <Page src={add} />
+                    <ChangePage to='/product'>
+                        <Page src={foods} />
+                    </ChangePage>
+                    <ChangePage to='/'>
+                        <Page src={bell} />
+                    </ChangePage>
+                    <ChangePage to='/order'>
+                        <Page src={cart} />
+                    </ChangePage>
+                    <ChangePage to='/profile'>
+                        <Page src={profilePic} account />
+                    </ChangePage>
+                    <ChangePage to='/add'>
+                        <Page src={add} />
+                    </ChangePage>
                 </Pages>
             </Toolbar>
         </Nav>
