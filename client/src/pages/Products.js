@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { NavBar, Pane } from "../components";
 import styled from "styled-components";
 
@@ -26,7 +26,7 @@ const tabData = [
 
 const Products = () => {
     const [activeTab, setActiveTab] = useState(tabData[0].name);
-    useEffect(() => console.log(activeTab), [activeTab]);
+
     return (
         <>
             <NavBar />
