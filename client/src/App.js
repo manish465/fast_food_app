@@ -19,7 +19,7 @@ const App = () => {
             <Route path='/add'>
                 <AddProduct />
             </Route>
-            <Route path='/product'>
+            <Route path='/product' exact>
                 <Product />
             </Route>
             <Route path='/profile'>
@@ -31,7 +31,7 @@ const App = () => {
             <Route path='/sign-up'>
                 <SignUp />
             </Route>
-            <Route path='/single-product'>
+            <Route path='/product/:id'>
                 <SingleProduct />
             </Route>
         </Switch>
