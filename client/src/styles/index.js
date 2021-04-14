@@ -1,5 +1,4 @@
 import styled from "styled-components";
-
 import GlobalStyle from "./globalStyles";
 import theme from "./theme";
 
@@ -30,10 +29,10 @@ export const TextBox = styled.input`
     border: none;
     border-radius: 20px;
     background-color: ${({ theme }) => theme.colors.accentColor};
+    box-shadow: ${({ theme }) => theme.shadow.default};
     &:focus {
         outline: none;
     }
-    box-shadow: ${({ theme }) => theme.shadow.default};
 `;
 
 export const Button = styled.button`
@@ -46,10 +45,10 @@ export const Button = styled.button`
     padding: 10px 20px;
     border-radius: 30px;
     cursor: pointer;
+    box-shadow: ${({ theme }) => theme.shadow.default};
     &:focus {
         outline: none;
     }
-    box-shadow: ${({ theme }) => theme.shadow.default};
 `;
 
 export const SizedBox = styled.div`
