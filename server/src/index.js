@@ -2,11 +2,14 @@ const express = require("express");
 const mongoose = require("mongoose");
 const dotenv = require("dotenv");
 const cors = require("cors");
+const { json, urlencoded } = require("body-parser");
 
 const app = express();
 dotenv.config();
+
+app.use(json({ limit: "30mb", extended: true }));
+app.use(urlencoded({ limit: "30mb", extended: true }));
 app.use(cors());
-app.use(express.json());
 
 const authRouter = require("./router/auth");
 const itemRouter = require("./router/item");

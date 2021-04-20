@@ -123,7 +123,7 @@ const Profile = () => {
                     </AddImageButtonLabel>
                     <SizedBox height='15px' />
                     <Info>
-                        Jhon Dow{" "}
+                        Jhon Dow
                         <InfoSVG
                             src={edit}
                             onClick={() => setOpenModal(true)}
