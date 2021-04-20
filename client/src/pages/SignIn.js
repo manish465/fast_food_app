@@ -1,7 +1,7 @@
 import styled from "styled-components";
-import axios from "axios";
 import { useForm } from "react-hook-form";
 import { useHistory } from "react-router-dom";
+import { signIn } from "../adapter";
 import {
     FlexColoumn,
     Padding,
@@ -28,19 +28,12 @@ const Heading = styled.h1`
 const SignIn = () => {
     const { register, getValues } = useForm();
     const history = useHistory();
-
     const handelSignIn = () => {
         const data = {
             email: getValues("email"),
             password: getValues("password"),
         };
-
-        axios
-            .post("http://localhost:8000/api/users/sign-in", data)
-            .then((res) => {
-                return res.data ? history.push("/") : null;
-            })
-            .catch((err) => console.log(err));
+        signIn(data, history);
     };
 
     return (

@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import axios from "axios";
+import { signUp } from "../adapter";
 import { useForm } from "react-hook-form";
 import { useHistory } from "react-router-dom";
 import styled from "styled-components";
@@ -86,12 +86,7 @@ const SignUp = () => {
             roles: getValues("roles"),
         };
 
-        axios
-            .post("http://localhost:8000/api/users/sign-up", data)
-            .then((res) => {
-                return res.data.msg ? history.push("/sign-in") : null;
-            })
-            .catch((err) => console.log(err));
+        signUp(data, history);
     };
 
     return (
