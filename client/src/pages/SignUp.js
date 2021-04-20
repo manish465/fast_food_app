@@ -1,6 +1,8 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
+import dotenv from "dotenv";
 import { useForm } from "react-hook-form";
+import { useHistory } from "react-router-dom";
 import styled from "styled-components";
 import {
     FlexColoumn,
@@ -13,6 +15,8 @@ import {
 } from "../styles";
 
 import deafultIMG from "../assets/images/profile.jpg";
+
+dotenv.config();
 
 const MainContainer = styled.div`
     background-color: ${({ theme }) => theme.colors.secondaryColor};
@@ -70,6 +74,7 @@ const DisplayForm = styled.form`
 const SignUp = () => {
     const [image, setImage] = useState(deafultIMG);
     const { register, getValues, watch } = useForm();
+    const history = useHistory();
     const profilePicture = watch("profile_pic");
     useEffect(() => {
         try {
@@ -92,8 +97,10 @@ const SignUp = () => {
         };
 
         axios
-            .post("http://localhost:8000/api/users/sign-up", data)
-            .then((response) => console.log(response))
+            .post(`${process.env.SERVER_URL}api/users/sign-up`, data)
+            .then((response) => {
+                response ? history.push("/sign-in") : null;
+            })
             .catch((error) => console.log(error));
     };
 
