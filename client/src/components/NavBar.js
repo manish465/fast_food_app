@@ -1,6 +1,11 @@
+import { useEffect } from "react";
+import { useContext } from "react";
+import { userContext } from "../context/auth";
+import axios from "axios";
+import { url } from "../adapter";
 import styled, { css } from "styled-components";
 import { add, bell, cart, foods, logo } from "../assets/svg";
-import profilePic from "../assets/images/profile.jpg";
+import profile_pic from "../assets/images/profile.jpg";
 import { ChangePage } from "../styles";
 
 const Nav = styled.div`
@@ -38,6 +43,16 @@ const Page = styled.img`
 `;
 
 const NavBar = () => {
+    const { authData, setAuthData } = useContext(userContext);
+    useEffect(() => {
+        axios(`${url}users`, {
+            headers: { authorization: "Bearer " + authData },
+        })
+            .then((res) =>
+                setAuthData((prev) => ({ ...prev, user: res.data.user })),
+            )
+            .catch((err) => console.log(err));
+    }, [authData, setAuthData]);
     return (
         <Nav>
             <Toolbar>
@@ -55,7 +70,14 @@ const NavBar = () => {
                         <Page src={cart} />
                     </ChangePage>
                     <ChangePage to='/profile'>
-                        <Page src={profilePic} account />
+                        <Page
+                            src={
+                                authData
+                                    ? authData.user.profile_pic
+                                    : profile_pic
+                            }
+                            account
+                        />
                     </ChangePage>
                     <ChangePage to='/add'>
                         <Page src={add} />

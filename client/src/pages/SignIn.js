@@ -1,7 +1,10 @@
+import { useContext } from "react";
+import { userContext } from "../context/auth";
 import styled from "styled-components";
+import axios from "axios";
 import { useForm } from "react-hook-form";
 import { useHistory } from "react-router-dom";
-import { signIn } from "../adapter";
+import { url } from "../adapter";
 import {
     FlexColoumn,
     Padding,
@@ -27,13 +30,25 @@ const Heading = styled.h1`
 
 const SignIn = () => {
     const { register, getValues } = useForm();
+    const { setAuthData } = useContext(userContext);
     const history = useHistory();
     const handelSignIn = () => {
         const data = {
             email: getValues("email"),
             password: getValues("password"),
         };
-        signIn(data, history);
+
+        axios
+            .post(`${url}users/sign-in`, data)
+            .then((res) => {
+                try {
+                    setAuthData((prev) => ({ ...prev, token: res.data.token }));
+                    history.push("/");
+                } catch (err) {
+                    console.log(err);
+                }
+            })
+            .catch((err) => console.log(err));
     };
 
     return (

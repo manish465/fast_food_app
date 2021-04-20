@@ -94,3 +94,19 @@ exports.signOut = (req, res) => {
     req.user = undefined;
     return res.status(200).json({ msg: "Logged out" });
 };
+
+exports.getUser = (req, res) => {
+    const { authorization } = req.headers;
+
+    const token = authorization.replace("Bearer ", "");
+    jwt.verify(token, process.env.JWT_SECRET, (err, payload) => {
+        if (err) {
+            return res.status(401).json({ err: "you must be logged in" });
+        }
+        const { _id } = payload;
+        User.findById(_id).then((user) => {
+            user.hash_password = undefined;
+            res.status(200).json({ user });
+        });
+    });
+};
