@@ -1,4 +1,7 @@
 import styled from "styled-components";
+import axios from "axios";
+import { useForm } from "react-hook-form";
+import { useHistory } from "react-router-dom";
 import {
     FlexColoumn,
     Padding,
@@ -23,19 +26,39 @@ const Heading = styled.h1`
 `;
 
 const SignIn = () => {
+    const { register, getValues } = useForm();
+    const history = useHistory();
+
+    const handelSignIn = () => {
+        const data = {
+            email: getValues("email"),
+            password: getValues("password"),
+        };
+
+        axios
+            .post("http://localhost:8000/api/users/sign-in", data)
+            .then((res) => {
+                return res.data ? history.push("/") : null;
+            })
+            .catch((err) => console.log(err));
+    };
+
     return (
         <MainContainer>
             <Padding padding='30px 40px'>
                 <FlexColoumn>
                     <Heading>Sign In</Heading>
-                    <TextBox placeholder='Enter Email' />
+                    <TextBox {...register("email")} placeholder='Enter Email' />
                     <SizedBox height='15px' />
-                    <TextBox placeholder='Enter Password' />
+                    <TextBox
+                        {...register("password")}
+                        placeholder='Enter Password'
+                    />
                     <SizedBox height='15px' />
                     <FlexRow space_between>
-                        <ChangePage to='/'>
-                            <Button primary>Sign In</Button>
-                        </ChangePage>
+                        <Button primary onClick={handelSignIn}>
+                            Sign In
+                        </Button>
                         <ChangePage to='/sign-up'>
                             <Button>Sign Up</Button>
                         </ChangePage>

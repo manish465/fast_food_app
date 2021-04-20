@@ -1,6 +1,5 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
-import dotenv from "dotenv";
 import { useForm } from "react-hook-form";
 import { useHistory } from "react-router-dom";
 import styled from "styled-components";
@@ -15,8 +14,6 @@ import {
 } from "../styles";
 
 import deafultIMG from "../assets/images/profile.jpg";
-
-dotenv.config();
 
 const MainContainer = styled.div`
     background-color: ${({ theme }) => theme.colors.secondaryColor};
@@ -64,13 +61,6 @@ const AddImageButtonLabel = styled.label`
     box-shadow: ${({ theme }) => theme.shadow.default};
 `;
 
-const DisplayForm = styled.form`
-    width: 100%;
-    display: inherit;
-    flex-direction: inherit;
-    align-items: inherit;
-`;
-
 const SignUp = () => {
     const [image, setImage] = useState(deafultIMG);
     const { register, getValues, watch } = useForm();
@@ -97,11 +87,11 @@ const SignUp = () => {
         };
 
         axios
-            .post(`${process.env.SERVER_URL}api/users/sign-up`, data)
-            .then((response) => {
-                response ? history.push("/sign-in") : null;
+            .post("http://localhost:8000/api/users/sign-up", data)
+            .then((res) => {
+                return res.data.msg ? history.push("/sign-in") : null;
             })
-            .catch((error) => console.log(error));
+            .catch((err) => console.log(err));
     };
 
     return (
@@ -111,50 +101,42 @@ const SignUp = () => {
                     <Heading>Sign Up</Heading>
                     <AddImageIMG src={image} />
                     <SizedBox height='15px' />
-                    <DisplayForm>
-                        <AddImageButtonLabel>
-                            Add Profile Picture
-                            <AddImageButton
-                                type='file'
-                                {...register("profile_pic")}
-                            />
-                        </AddImageButtonLabel>
-                        <SizedBox height='15px' />
-                        <TextBox
-                            {...register("name")}
-                            placeholder='Enter Name'
+                    <AddImageButtonLabel>
+                        Add Profile Picture
+                        <AddImageButton
+                            type='file'
+                            {...register("profile_pic")}
                         />
-                        <SizedBox height='15px' />
-                        <TextBox
-                            {...register("email")}
-                            placeholder='Enter Email'
-                        />
-                        <SizedBox height='15px' />
-                        <TextBox
-                            {...register("password_1")}
-                            placeholder='Enter Password'
-                        />
-                        <SizedBox height='15px' />
-                        <TextBox
-                            {...register("password_2")}
-                            placeholder='Re-Enter Password'
-                        />
-                        <SizedBox height='15px' />
-                        <TextBox
-                            {...register("address")}
-                            placeholder='Enter Address'
-                        />
-                        <SizedBox height='15px' />
-                        <TextBox
-                            {...register("phone_no")}
-                            placeholder='Enter Phone'
-                        />
-                        <SizedBox height='15px' />
-                        <Select {...register("roles")}>
-                            <option>User</option>
-                            <option>Admin</option>
-                        </Select>
-                    </DisplayForm>
+                    </AddImageButtonLabel>
+                    <SizedBox height='15px' />
+                    <TextBox {...register("name")} placeholder='Enter Name' />
+                    <SizedBox height='15px' />
+                    <TextBox {...register("email")} placeholder='Enter Email' />
+                    <SizedBox height='15px' />
+                    <TextBox
+                        {...register("password_1")}
+                        placeholder='Enter Password'
+                    />
+                    <SizedBox height='15px' />
+                    <TextBox
+                        {...register("password_2")}
+                        placeholder='Re-Enter Password'
+                    />
+                    <SizedBox height='15px' />
+                    <TextBox
+                        {...register("address")}
+                        placeholder='Enter Address'
+                    />
+                    <SizedBox height='15px' />
+                    <TextBox
+                        {...register("phone_no")}
+                        placeholder='Enter Phone'
+                    />
+                    <SizedBox height='15px' />
+                    <Select {...register("roles")}>
+                        <option>User</option>
+                        <option>Admin</option>
+                    </Select>
                     <SizedBox height='15px' />
                     <FlexRow space_between>
                         <Button primary onClick={handelSubmit}>
