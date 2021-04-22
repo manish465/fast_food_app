@@ -1,13 +1,11 @@
-import { useEffect } from "react";
 import { useContext } from "react";
-import axios from "axios";
 import styled, { css } from "styled-components";
 
 import profile_pic from "../assets/images/profile.jpg";
 import { userContext } from "../context/auth";
-import { url } from "../adapter";
 import { add, bell, cart, foods, logo } from "../assets/svg";
 import { ChangePage } from "../styles";
+import { picturebase } from "../adapter";
 
 const Nav = styled.div`
     height: 50px;
@@ -39,21 +37,16 @@ const Page = styled.img`
     ${(props) =>
         props.account &&
         css`
-            border-radius: 10px;
+            object-fit: cover;
+            height: 20px;
+            border-radius: 50%;
         `}
 `;
 
 const NavBar = () => {
-    const { authData, setAuthData } = useContext(userContext);
-    useEffect(() => {
-        axios(`${url}users`, {
-            headers: { authorization: "Bearer " + authData },
-        })
-            .then((res) =>
-                setAuthData((prev) => ({ ...prev, user: res.data.user })),
-            )
-            .catch((err) => console.log(err));
-    }, [authData, setAuthData]);
+    const { authData } = useContext(userContext);
+    console.log(authData);
+
     return (
         <Nav>
             <Toolbar>
@@ -74,7 +67,7 @@ const NavBar = () => {
                         <Page
                             src={
                                 authData
-                                    ? authData.user.profile_pic
+                                    ? picturebase + authData.user.picture
                                     : profile_pic
                             }
                             account

@@ -42,7 +42,11 @@ const SignIn = () => {
             .post(`${url}users/sign-in`, data)
             .then((res) => {
                 try {
-                    setAuthData((prev) => ({ ...prev, token: res.data.token }));
+                    setAuthData((prev) => ({
+                        ...prev,
+                        token: res.data.token,
+                        user: res.data.user,
+                    }));
                     history.push("/");
                 } catch (err) {
                     console.log(err);
