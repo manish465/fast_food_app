@@ -45,7 +45,6 @@ const Page = styled.img`
 
 const NavBar = () => {
     const { authData } = useContext(userContext);
-    console.log(authData);
 
     return (
         <Nav>
