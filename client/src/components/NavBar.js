@@ -1,11 +1,12 @@
 import { useEffect } from "react";
 import { useContext } from "react";
-import { userContext } from "../context/auth";
 import axios from "axios";
-import { url } from "../adapter";
 import styled, { css } from "styled-components";
-import { add, bell, cart, foods, logo } from "../assets/svg";
+
 import profile_pic from "../assets/images/profile.jpg";
+import { userContext } from "../context/auth";
+import { url } from "../adapter";
+import { add, bell, cart, foods, logo } from "../assets/svg";
 import { ChangePage } from "../styles";
 
 const Nav = styled.div`

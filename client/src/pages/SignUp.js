@@ -67,25 +67,26 @@ const SignUp = () => {
     const { register, getValues, watch } = useForm();
     const history = useHistory();
     const profilePicture = watch("profile_pic");
+
     useEffect(() => {
         try {
             setImage(URL.createObjectURL(profilePicture[0]));
+            console.log(profilePicture[0]);
         } catch (e) {
             setImage(deafultIMG);
         }
     }, [profilePicture]);
 
     const handelSubmit = () => {
-        const data = {
-            name: getValues("name"),
-            email: getValues("email"),
-            password_1: getValues("password_1"),
-            password_2: getValues("password_2"),
-            address: getValues("address"),
-            phone_no: getValues("phone_no"),
-            profile_pic: image,
-            roles: getValues("roles"),
-        };
+        const data = new FormData();
+        data.append("name", getValues("name"));
+        data.append("email", getValues("email"));
+        data.append("password_1", getValues("password_1"));
+        data.append("password_2", getValues("password_2"));
+        data.append("address", getValues("address"));
+        data.append("phone_no", getValues("phone_no"));
+        data.append("roles", getValues("roles"));
+        data.append("picture", profilePicture[0]);
 
         axios
             .post(`${url}users/sign-up`, data)
@@ -105,6 +106,7 @@ const SignUp = () => {
                     <AddImageButtonLabel>
                         Add Profile Picture
                         <AddImageButton
+                            accept='.png, .jpg, .jpeg'
                             type='file'
                             {...register("profile_pic")}
                         />

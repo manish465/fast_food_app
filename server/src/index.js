@@ -2,35 +2,37 @@ const express = require("express");
 const mongoose = require("mongoose");
 const dotenv = require("dotenv");
 const cors = require("cors");
-const { json, urlencoded } = require("body-parser");
+const { json } = require("body-parser");
 
 const app = express();
 dotenv.config();
 
-app.use(json({ limit: "30mb", extended: true }));
-app.use(urlencoded({ limit: "30mb", extended: true }));
+const port = process.env.PORT || 8000;
+
+app.use(json());
 app.use(cors());
+app.use("/images", express.static("images"));
 
 const authRouter = require("./router/auth");
 const itemRouter = require("./router/item");
 
-const port = process.env.PORT;
-
-app.get("/", (req, res) => {
+app.get("/", (_req, res) => {
     res.send("Welcome To Fast Food Delivery Service");
 });
 
 app.use("/api/users", authRouter);
 app.use("/api/item", itemRouter);
 
-app.listen(port, () =>
-    mongoose.connect(
-        process.env.DB_URL,
-        { useNewUrlParser: true, useUnifiedTopology: true },
-        (err) => {
-            err
-                ? console.log("Something went wrong")
-                : console.log("Connected to db");
-        },
-    ),
+mongoose.connect(
+    process.env.DB_URL,
+    {
+        useNewUrlParser: true,
+        useUnifiedTopology: true,
+        useCreateIndex: true,
+    },
+    (err) => {
+        err
+            ? console.log("Something went wrong")
+            : app.listen(port, () => console.log("Connected to db"));
+    },
 );

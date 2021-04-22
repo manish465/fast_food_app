@@ -13,21 +13,19 @@ exports.signUp = (req, res) => {
         password_2,
         address,
         phone_no,
-        profile_pic,
         roles,
     } = req.body;
-
     if (
         !name ||
         !email ||
         !password_1 ||
         !password_2 ||
         !address ||
-        !phone_no
+        !phone_no ||
+        !req.file
     ) {
         return res.status(400).json({ err: "Invelid Inputs" });
     }
-
     User.findOne({ email, phone_no }).then((user) => {
         if (user) {
             return res.status(400).json({ err: "User Exists" });
@@ -37,9 +35,7 @@ exports.signUp = (req, res) => {
                 .status(400)
                 .json({ err: "Both password should be same" });
         }
-
         hash_password = bcrypt.hashSync(password_1, 10);
-
         const _user = new User({
             name,
             email,
@@ -47,9 +43,8 @@ exports.signUp = (req, res) => {
             address,
             phone_no,
             roles,
-            profile_pic,
+            picture: req.file.path,
         });
-
         _user
             .save()
             .then(() => {
