@@ -1,6 +1,8 @@
-import { useState } from "react";
+import { useState, useContext } from "react";
 import styled from "styled-components";
+import { userContext } from "../context/auth";
 import { NavBar } from "../components";
+import { picturebase } from "../adapter";
 import {
     FlexColoumn,
     Padding,
@@ -86,7 +88,11 @@ const ModalForm = styled.div`
 `;
 
 const Profile = () => {
-    const [image, setImage] = useState(deafultIMG);
+    const { authData } = useContext(userContext);
+
+    const [image, setImage] = useState(
+        authData.user ? picturebase + authData.user.picture : deafultIMG,
+    );
     const [openModal, setOpenModal] = useState(false);
 
     const handelChange = (event) => {
@@ -123,28 +129,28 @@ const Profile = () => {
                     </AddImageButtonLabel>
                     <SizedBox height='15px' />
                     <Info>
-                        Jhon Dow
+                        {authData.user ? authData.user.name : "Loading ..."}
                         <InfoSVG
                             src={edit}
                             onClick={() => setOpenModal(true)}
                         />
                     </Info>
                     <Info normal>
-                        J34N@gmail.com
+                        {authData.user ? authData.user.email : "Loading ..."}
                         <InfoSVG
                             src={edit}
                             onClick={() => setOpenModal(true)}
                         />
                     </Info>
                     <Info normal>
-                        +91 6273861232
+                        {authData.user ? authData.user.phone_no : "Loading ..."}
                         <InfoSVG
                             src={edit}
                             onClick={() => setOpenModal(true)}
                         />
                     </Info>
                     <Info normal>
-                        21B Baker Street , London
+                        {authData.user ? authData.user.address : "Loading ..."}
                         <InfoSVG
                             src={edit}
                             onClick={() => setOpenModal(true)}
