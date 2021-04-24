@@ -1,5 +1,5 @@
 import { useEffect, useContext } from "react";
-import { Switch, Route } from "react-router-dom";
+import { Switch, Route, useHistory } from "react-router-dom";
 
 import { userContext } from "./context/auth";
 import {
@@ -15,51 +15,49 @@ import {
 import { PrivateAuthRoute, PrivateAdminRoute } from "./PrivateRoute";
 
 const App = () => {
-    const { authData, setAuthData } = useContext(userContext);
+    const { setAuthData } = useContext(userContext);
+    const history = useHistory();
 
     useEffect(() => {
-        try {
-            setAuthData(JSON.parse(localStorage.getItem("auth")));
-        } catch (err) {
-            setAuthData({
-                token: null,
-                user: null,
-                isAdmin: false,
-                isAuthenticated: false,
-            });
-        }
-    }, [setAuthData]);
+        const data = JSON.parse(localStorage.getItem("auth"));
+        data ? history.push("/") : history.push("/sign-in");
+        setAuthData(
+            data
+                ? {
+                      user: data.user,
+                      isAdmin: data.user.roles === "Admin",
+                      isAuthenticated: data ? true : false,
+                  }
+                : null,
+        );
+    }, [setAuthData, history]);
     return (
-        <>
-            {authData ? (
-                <Switch>
-                    <Route path='/sign-in'>
-                        <SignIn />
-                    </Route>
-                    <Route path='/sign-up'>
-                        <SignUp />
-                    </Route>
-                    <PrivateAuthRoute path='/' exact>
-                        <Home />
-                    </PrivateAuthRoute>
-                    <PrivateAdminRoute path='/add'>
-                        <AddProduct />
-                    </PrivateAdminRoute>
-                    <PrivateAuthRoute path='/order'>
-                        <Order />
-                    </PrivateAuthRoute>
-                    <PrivateAuthRoute path='/product' exact>
-                        <Product />
-                    </PrivateAuthRoute>
-                    <PrivateAuthRoute path='/profile'>
-                        <Profile />
-                    </PrivateAuthRoute>
-                    <PrivateAuthRoute path='/product/:id'>
-                        <SingleProduct />
-                    </PrivateAuthRoute>
-                </Switch>
-            ) : null}
-        </>
+        <Switch>
+            <Route path='/sign-in'>
+                <SignIn />
+            </Route>
+            <Route path='/sign-up'>
+                <SignUp />
+            </Route>
+            <PrivateAuthRoute path='/' exact>
+                <Home />
+            </PrivateAuthRoute>
+            <PrivateAdminRoute path='/add'>
+                <AddProduct />
+            </PrivateAdminRoute>
+            <PrivateAuthRoute path='/order'>
+                <Order />
+            </PrivateAuthRoute>
+            <PrivateAuthRoute path='/product' exact>
+                <Product />
+            </PrivateAuthRoute>
+            <PrivateAuthRoute path='/profile'>
+                <Profile />
+            </PrivateAuthRoute>
+            <PrivateAuthRoute path='/product/:id'>
+                <SingleProduct />
+            </PrivateAuthRoute>
+        </Switch>
     );
 };
 

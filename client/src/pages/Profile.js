@@ -1,16 +1,11 @@
 import { useState, useContext } from "react";
 import styled from "styled-components";
+import { useHistory } from "react-router-dom";
+
 import { userContext } from "../context/auth";
 import { NavBar } from "../components";
 import { picturebase } from "../adapter";
-import {
-    FlexColoumn,
-    Padding,
-    SizedBox,
-    TextBox,
-    Button,
-    ChangePage,
-} from "../styles";
+import { FlexColoumn, Padding, SizedBox, TextBox, Button } from "../styles";
 import deafultIMG from "../assets/images/profile.jpg";
 import { edit } from "../assets/svg";
 
@@ -57,6 +52,7 @@ const InfoSVG = styled.img`
 `;
 
 const SignOutButton = styled.button`
+    cursor: pointer;
     width: 100px;
     height: 40px;
     border: none;
@@ -88,8 +84,8 @@ const ModalForm = styled.div`
 `;
 
 const Profile = () => {
-    const { authData } = useContext(userContext);
-
+    const { authData, setAuthData } = useContext(userContext);
+    const history = useHistory();
     const [image, setImage] = useState(
         authData.user ? picturebase + authData.user.picture : deafultIMG,
     );
@@ -101,6 +97,12 @@ const Profile = () => {
         } catch (err) {
             setImage(deafultIMG);
         }
+    };
+
+    const handelSignOut = () => {
+        localStorage.removeItem("auth");
+        setAuthData(null);
+        history.push("/sign-in");
     };
     return (
         <>
@@ -157,9 +159,9 @@ const Profile = () => {
                         />
                     </Info>
                     <SizedBox height='35px' />
-                    <ChangePage to='/sign-in'>
-                        <SignOutButton>Sign Out</SignOutButton>
-                    </ChangePage>
+                    <SignOutButton onClick={handelSignOut}>
+                        Sign Out
+                    </SignOutButton>
                 </FlexColoumn>
             </Padding>
         </>

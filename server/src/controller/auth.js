@@ -84,9 +84,3 @@ exports.signIn = (req, res) => {
             .catch((err) => console.log(err));
     });
 };
-
-exports.signOut = (req, res) => {
-    req.headers.authorization = undefined;
-    req.user = undefined;
-    return res.status(200).json({ msg: "Logged out" });
-};

@@ -30,7 +30,7 @@ const Heading = styled.h1`
 
 const SignIn = () => {
     const { register, getValues } = useForm();
-    const { authData, setAuthData } = useContext(userContext);
+    const { setAuthData } = useContext(userContext);
     const history = useHistory();
     const handelSignIn = () => {
         const data = {
@@ -41,16 +41,13 @@ const SignIn = () => {
         axios
             .post(url + "users/sign-in", data)
             .then((res) => {
+                localStorage.setItem("auth", JSON.stringify(res.data));
                 setAuthData((prev) => ({
                     ...prev,
-                    token: res.data.token,
                     user: res.data.user,
                     isAdmin: res.data.user.roles === "Admin",
                     isAuthenticated: true,
                 }));
-            })
-            .then(() => {
-                localStorage.setItem("auth", JSON.stringify(authData));
             })
             .then(() => {
                 history.push("/");
