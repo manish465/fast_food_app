@@ -1,14 +1,14 @@
 const Item = require("../models/item");
 
 exports.add = (req, res) => {
-    const { main_pic, name, restaurant, description, rating, type } = req.body;
+    const { name, restaurant, description, rating, type } = req.body;
 
-    if (!name || !restaurant || !description || !type) {
+    if (!name || !restaurant || !description || !type || !req.file) {
         return res.status(400).json({ err: "Invelid Inputs" });
     }
 
     const _item = new Item({
-        main_pic,
+        main_pic: req.file.path,
         name,
         restaurant,
         description,
@@ -26,7 +26,7 @@ exports.add = (req, res) => {
         });
 };
 
-exports.showAll = (req, res) => {
+exports.showAll = (_req, res) => {
     Item.find()
         .then((result) => {
             return res.status(200).json({ result });

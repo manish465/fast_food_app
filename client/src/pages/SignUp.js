@@ -71,7 +71,6 @@ const SignUp = () => {
     useEffect(() => {
         try {
             setImage(URL.createObjectURL(profilePicture[0]));
-            console.log(profilePicture[0]);
         } catch (e) {
             setImage(deafultIMG);
         }
@@ -89,7 +88,7 @@ const SignUp = () => {
         data.append("picture", profilePicture[0]);
 
         axios
-            .post(`${url}users/sign-up`, data)
+            .post(url + "users/sign-up", data)
             .then(() => {
                 history.push("/sign-in");
             })

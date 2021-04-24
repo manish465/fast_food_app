@@ -31,7 +31,7 @@ export const PrivateAdminRoute = ({ children, ...rest }) => {
         <Route
             {...rest}
             render={(props) =>
-                authData.isAuthenticated && authData.user.roles === "Admin" ? (
+                authData && authData.isAdmin ? (
                     children
                 ) : (
                     <Redirect
