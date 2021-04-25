@@ -1,8 +1,9 @@
 import styled from "styled-components";
-import fastFood from "../assets/images/fast-food.jpg";
+
 import { FlexColoumn } from "../styles";
 import { add } from "../assets/svg";
 import { ChangePage } from "../styles";
+import { picturebase } from "../adapter";
 
 const ContainerCard = styled.div`
     width: 220px;
@@ -46,6 +47,7 @@ const ContainerCardButton = styled.button`
     cursor: pointer;
     display: flex;
     align-items: center;
+    justify-content: center;
     &:focus {
         outline: none;
     }
@@ -56,15 +58,15 @@ const ContainerCardButtonIcon = styled.img`
     fill: ${({ theme }) => theme.colors.accentColor};
 `;
 
-const SecondaryCard = () => {
+const SecondaryCard = ({ _id, main_pic, name, price }) => {
     return (
         <ContainerCard>
-            <ChangePage to='/product/1233'>
-                <ContainerCardImage src={fastFood} />
+            <ChangePage to={"/product/" + _id}>
+                <ContainerCardImage src={picturebase + main_pic} />
             </ChangePage>
             <FlexColoumn>
-                <ContainerCardName>Cheeseburger</ContainerCardName>
-                <ContainerCardPrice>$61.32</ContainerCardPrice>
+                <ContainerCardName>{name}</ContainerCardName>
+                <ContainerCardPrice>${price}</ContainerCardPrice>
                 <ContainerCardButton>
                     <ContainerCardButtonIcon src={add} />
                 </ContainerCardButton>

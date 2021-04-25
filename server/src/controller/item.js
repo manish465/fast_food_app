@@ -55,3 +55,12 @@ exports.treanding = (_req, res) => {
         .then((result) => res.status(200).json({ result }))
         .catch(() => res.status(400).json({ err: "Somthing went wrong " }));
 };
+
+exports.popular = (_req, res) => {
+    Item.find()
+        .select("_id name main_pic price")
+        .sort("name")
+        .limit(10)
+        .then((result) => res.status(200).json({ result }))
+        .catch(() => res.status(400).json({ err: "Somthing went wrong " }));
+};
