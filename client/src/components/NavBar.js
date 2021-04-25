@@ -72,9 +72,11 @@ const NavBar = () => {
                             account
                         />
                     </ChangePage>
-                    <ChangePage to='/add'>
-                        <Page src={add} />
-                    </ChangePage>
+                    {authData.isAdmin && (
+                        <ChangePage to='/add'>
+                            <Page src={add} />
+                        </ChangePage>
+                    )}
                 </Pages>
             </Toolbar>
         </Nav>

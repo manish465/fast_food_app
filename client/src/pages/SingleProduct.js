@@ -1,8 +1,12 @@
+import { useEffect, useContext, useState } from "react";
+import axios from "axios";
 import styled from "styled-components";
+import { useParams } from "react-router-dom";
+
 import { NavBar } from "../components";
 import { Padding, SizedBox } from "../styles";
-
-import fastFood from "../assets/images/fast-food.jpg";
+import { userContext } from "../context/auth";
+import { url, picturebase } from "../adapter";
 
 const Coloumn = styled.div`
     display: flex;
@@ -12,7 +16,7 @@ const Coloumn = styled.div`
 const ProductImage = styled.img`
     width: 100%;
     height: 300px;
-    object-fit: cover;
+    object-fit: contain;
     border-radius: 0 0 30px 30px;
 `;
 
@@ -61,36 +65,44 @@ const ProductButton = styled.button`
 `;
 
 const SingleProduct = () => {
+    const { id } = useParams();
+    const { authData } = useContext(userContext);
+
+    const [data, setData] = useState(null);
+
+    useEffect(() => {
+        axios
+            .get(url + "item/one-item/" + id, {
+                headers: { Authorization: "Bearer " + authData.token },
+            })
+            .then((res) => setData(res.data.result))
+            .catch((err) => console.log(err));
+    }, [authData.token, id]);
+
     return (
         <>
             <NavBar />
             <Coloumn>
-                <ProductImage src={fastFood} />
+                {data ? (
+                    <ProductImage src={picturebase + data.main_pic} />
+                ) : (
+                    "Loading..."
+                )}
             </Coloumn>
             <Padding padding='10px 30px'>
-                <ProductName>Cheeseburgerv</ProductName>
+                <ProductName>{data ? data.name : "Loading..."}</ProductName>
                 <Padding padding='0px 10px'>
-                    <ProductResturntName>From T-sub</ProductResturntName>
-                    <ProductPrice>$49.23</ProductPrice>
+                    <ProductResturntName>
+                        From {data ? data.restaurant : "Loading..."}
+                    </ProductResturntName>
+                    <ProductPrice>
+                        ${data ? data.price : "Loading..."}
+                    </ProductPrice>
                     <SizedBox height='15px' />
                     <ProductButton>ADD</ProductButton>
                     <SizedBox height='15px' />
                     <ProductDescription>
-                        Lorem ipsum, dolor sit amet consectetur adipisicing
-                        elit. Ratione, magni nulla quia accusantium cum iure
-                        earum id sed neque ipsa. Tempora assumenda commodi culpa
-                        cum doloribus at in exercitationem a, quos nobis
-                        sapiente doloremque, iste ad ratione sunt dolores
-                        quisquam repudiandae temporibus dolore sequi
-                        perspiciatis sed? Voluptas veniam iusto quisquam nulla!
-                        Similique est reprehenderit, excepturi quasi eos facere,
-                        soluta voluptatum expedita totam distinctio itaque eum
-                        dolor. Ut repudiandae pariatur doloribus dolore eligendi
-                        consectetur necessitatibus itaque, magnam tempore quia
-                        aspernatur iusto modi, ratione perspiciatis? Quia
-                        laborum, magni, similique dolore fugit et porro eius,
-                        accusamus ipsum odio quaerat velit quis quidem
-                        repudiandae!
+                        {data ? data.description : "Loading..."}
                     </ProductDescription>
                 </Padding>
             </Padding>
