@@ -30,7 +30,8 @@ const TrendingContainer = () => {
             .get(url + "item/trending", {
                 headers: { Authorization: "Bearer " + authData.token },
             })
-            .then((res) => setList(res.data.result));
+            .then((res) => setList(res.data.result))
+            .catch((err) => console.log(err));
     }, [authData.token]);
 
     return (

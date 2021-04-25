@@ -30,10 +30,8 @@ const PopularContainer = () => {
             .get(url + "item/popular", {
                 headers: { Authorization: "Bearer " + authData.token },
             })
-            .then((res) => {
-                setList(res.data.result);
-                console.log(res);
-            });
+            .then((res) => setList(res.data.result))
+            .catch((err) => console.log(err));
     }, [authData.token]);
     return (
         <Container>

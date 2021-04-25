@@ -1,6 +1,10 @@
-import { useState } from "react";
+import { useState, useEffect, useContext } from "react";
+import axios from "axios";
+
 import { NavBar, Pane } from "../components";
 import styled from "styled-components";
+import { url } from "../adapter";
+import { userContext } from "../context/auth";
 
 const Tabs = styled.div`
     height: 60px;
@@ -18,14 +22,26 @@ const Tab = styled.div`
 
 const tabData = [
     { name: "Burger" },
-    { name: "Drinks" },
+    { name: "Chicken" },
     { name: "Fries" },
-    { name: "Sandwich" },
-    { name: "Other" },
+    { name: "Tacos" },
+    { name: "Dessert" },
+    { name: "Misc." },
 ];
 
 const Products = () => {
     const [activeTab, setActiveTab] = useState(tabData[0].name);
+    const [list, setList] = useState([]);
+    const { authData } = useContext(userContext);
+
+    useEffect(() => {
+        axios
+            .get(url + "item/type/" + activeTab, {
+                headers: { Authorization: "Bearer " + authData.token },
+            })
+            .then((res) => setList(res.data.result))
+            .catch((err) => console.log(err));
+    }, [activeTab, list, authData.token]);
 
     return (
         <>
@@ -37,7 +53,7 @@ const Products = () => {
                     </Tab>
                 ))}
             </Tabs>
-            <Pane activeTab={activeTab} />
+            <Pane list={list} activeTab={activeTab} />
         </>
     );
 };

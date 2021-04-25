@@ -64,3 +64,12 @@ exports.popular = (_req, res) => {
         .then((result) => res.status(200).json({ result }))
         .catch(() => res.status(400).json({ err: "Somthing went wrong " }));
 };
+
+exports.byType = (req, res) => {
+    const type = req.params.type;
+
+    Item.find({ type })
+        .select("_id main_pic name price")
+        .then((result) => res.status(200).json({ result }))
+        .catch(() => res.status(400).json({ err: "Somthing went wrong " }));
+};
