@@ -44,6 +44,14 @@ exports.showOne = (req, res) => {
             return res.status(200).json({ result });
         })
         .catch(() => {
-            return res.status(400).json({ err: "Somthing went wrong" });
+            return res.status(400).json({ err: "Somthing went wrong " });
         });
+};
+
+exports.treanding = (_req, res) => {
+    Item.find()
+        .select("_id name main_pic price restaurant")
+        .limit(6)
+        .then((result) => res.status(200).json({ result }))
+        .catch(() => res.status(400).json({ err: "Somthing went wrong " }));
 };

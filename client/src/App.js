@@ -24,6 +24,7 @@ const App = () => {
         setAuthData(
             data
                 ? {
+                      token: data.token,
                       user: data.user,
                       isAdmin: data.user.roles === "Admin",
                       isAuthenticated: data ? true : false,

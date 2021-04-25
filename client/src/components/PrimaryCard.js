@@ -1,7 +1,8 @@
 import styled from "styled-components";
-import fastFood from "../assets/images/fast-food.jpg";
+
 import { FlexColoumn } from "../styles";
 import { ChangePage } from "../styles";
+import { picturebase } from "../adapter";
 
 const ContainerCard = styled.div`
     width: 400px;
@@ -18,7 +19,7 @@ const ContainerCardImage = styled.img`
     margin: 0 auto;
     display: block;
     border-radius: 30px;
-    object-fit: cover;
+    object-fit: fill;
 `;
 
 const ContainerCardName = styled.h5`
@@ -56,20 +57,18 @@ const ContainerCardButton = styled.button`
     background-color: ${({ theme }) => theme.colors.accentColor};
 `;
 
-const PrimaryCard = () => {
+const PrimaryCard = ({ _id, main_pic, name, price, restaurant }) => {
     return (
         <ContainerCard>
-            <ChangePage to='/product/1233'>
-                <ContainerCardImage src={fastFood} />
+            <ChangePage to={"/product/" + _id}>
+                <ContainerCardImage src={picturebase + main_pic} />
             </ChangePage>
             <FlexColoumn>
-                <ContainerCardName>
-                    Quiznos Turkey Bacon Guacamole sub
-                </ContainerCardName>
+                <ContainerCardName>{name}</ContainerCardName>
                 <ContainerCardRestaurantName>
-                    From T-sub
+                    From {restaurant}
                 </ContainerCardRestaurantName>
-                <ContainerCardPrice>$45.99</ContainerCardPrice>
+                <ContainerCardPrice>${price}</ContainerCardPrice>
                 <ContainerCardButton>ADD</ContainerCardButton>
             </FlexColoumn>
         </ContainerCard>
