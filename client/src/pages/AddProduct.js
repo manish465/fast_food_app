@@ -18,7 +18,7 @@ const MainContainer = styled.div`
 
 const Heading = styled.h1`
     font-size: 2.5rem;
-    font-family: bold;
+    font-family: antonio;
     color: ${({ theme }) => theme.colors.primaryColor};
 `;
 
@@ -90,6 +90,7 @@ const AddProduct = () => {
         data.append("description", getValues("description"));
         data.append("type", getValues("type"));
         data.append("rating", getValues("rating"));
+        data.append("price", getValues("price"));
 
         axios
             .post(url + "item/add", data, {
@@ -134,23 +135,26 @@ const AddProduct = () => {
                         />
                         <SizedBox height='15px' />
                         <TextBox
+                            placeholder='Enter Price'
+                            type='number'
+                            {...register("price")}
+                        />
+                        <SizedBox height='15px' />
+                        <TextBox
                             placeholder='Enter Product Description'
                             {...register("description")}
                         />
                         <SizedBox height='15px' />
-                        <Select {...register("type")}>
+                        <Select
+                            placeholder='Enter Product Type'
+                            {...register("type")}>
                             <option>Burger</option>
-                            <option>Drink</option>
+                            <option>Chicken</option>
                             <option>Fries</option>
-                            <option>Sandwich</option>
-                            <option>Other</option>
+                            <option>Tacos</option>
+                            <option>Dessert</option>
+                            <option>Misc.</option>
                         </Select>
-                        <SizedBox height='15px' />
-                        <TextBox
-                            type='number'
-                            placeholder='Enter Rating'
-                            {...register("rating")}
-                        />
                         <SizedBox height='25px' />
                         <SaveButton onClick={handelSubmit}>SAVE</SaveButton>
                     </FlexColoumn>

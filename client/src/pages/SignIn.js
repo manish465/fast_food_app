@@ -24,7 +24,7 @@ const MainContainer = styled.div`
 
 const Heading = styled.h1`
     font-size: 2.5rem;
-    font-family: bold;
+    font-family: antonio;
     color: ${({ theme }) => theme.colors.primaryColor};
 `;
 

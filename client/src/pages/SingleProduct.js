@@ -1,7 +1,6 @@
 import styled from "styled-components";
 import { NavBar } from "../components";
 import { Padding, SizedBox } from "../styles";
-import StarRatings from "react-star-ratings";
 
 import fastFood from "../assets/images/fast-food.jpg";
 
@@ -53,7 +52,7 @@ const ProductButton = styled.button`
     box-shadow: ${({ theme }) => theme.shadow.default};
     cursor: pointer;
     color: ${({ theme }) => theme.colors.textColor};
-    font-family: Regular;
+    font-family: antonio;
     font-weight: bold;
     background-color: ${({ theme }) => theme.colors.accentColor};
     &:focus {
@@ -73,11 +72,6 @@ const SingleProduct = () => {
                 <Padding padding='0px 10px'>
                     <ProductResturntName>From T-sub</ProductResturntName>
                     <ProductPrice>$49.23</ProductPrice>
-                    <StarRatings
-                        rating={3.5}
-                        starRatedColor='grey'
-                        starDimension='30px'
-                    />
                     <SizedBox height='15px' />
                     <ProductButton>ADD</ProductButton>
                     <SizedBox height='15px' />

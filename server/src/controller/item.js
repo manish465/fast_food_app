@@ -1,9 +1,9 @@
 const Item = require("../models/item");
 
 exports.add = (req, res) => {
-    const { name, restaurant, description, rating, type } = req.body;
+    const { name, restaurant, description, type, price } = req.body;
 
-    if (!name || !restaurant || !description || !type || !req.file) {
+    if (!name || !restaurant || !description || !type || !req.file || !price) {
         return res.status(400).json({ err: "Invelid Inputs" });
     }
 
@@ -12,8 +12,8 @@ exports.add = (req, res) => {
         name,
         restaurant,
         description,
-        rating,
         type,
+        price,
     });
 
     _item

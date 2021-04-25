@@ -18,12 +18,12 @@ const itemSchema = new mongoose.Schema({
         type: String,
         required: true,
     },
-    rating: {
-        type: Number,
-        default: 3,
-    },
     type: {
         type: String,
+        required: true,
+    },
+    price: {
+        type: Number,
         required: true,
     },
 });
