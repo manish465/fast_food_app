@@ -18,6 +18,7 @@ const ProductImage = styled.img`
     height: 300px;
     object-fit: contain;
     border-radius: 0 0 30px 30px;
+    margin-top: 20px;
 `;
 
 const ProductName = styled.h2`
