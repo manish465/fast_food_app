@@ -6,7 +6,7 @@ import { useParams } from "react-router-dom";
 import { NavBar } from "../components";
 import { Padding, SizedBox } from "../styles";
 import { userContext } from "../context/auth";
-import { url, picturebase } from "../adapter";
+import { picturebase } from "../adapter";
 import { productContext } from "../context/product";
 
 const Coloumn = styled.div`
@@ -75,7 +75,7 @@ const SingleProduct = () => {
 
     useEffect(() => {
         axios
-            .get(url + "item/one-item/" + id, {
+            .get("/item/one-item/" + id, {
                 headers: { Authorization: "Bearer " + authData.token },
             })
             .then((res) => setData(res.data.result))

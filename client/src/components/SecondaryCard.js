@@ -1,9 +1,8 @@
 import { useContext } from "react";
 import styled from "styled-components";
 
-import { FlexColoumn } from "../styles";
+import { FlexColoumn, ChangePage } from "../styles";
 import { add } from "../assets/svg";
-import { ChangePage } from "../styles";
 import { picturebase } from "../adapter";
 import { productContext } from "../context/product";
 

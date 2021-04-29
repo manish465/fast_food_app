@@ -1,10 +1,10 @@
 import { useContext } from "react";
-import { userContext } from "../context/auth";
 import styled from "styled-components";
 import axios from "axios";
 import { useForm } from "react-hook-form";
 import { useHistory } from "react-router-dom";
-import { url } from "../adapter";
+
+import { userContext } from "../context/auth";
 import {
     FlexColoumn,
     Padding,
@@ -39,7 +39,7 @@ const SignIn = () => {
         };
 
         axios
-            .post(url + "users/sign-in", data)
+            .post("/users/sign-in", data)
             .then((res) => {
                 localStorage.setItem("auth", JSON.stringify(res.data));
                 setAuthData((prev) => ({

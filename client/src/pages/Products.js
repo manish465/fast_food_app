@@ -36,7 +36,7 @@ const Products = () => {
 
     useEffect(() => {
         axios
-            .get(url + "item/type/" + activeTab, {
+            .get("/item/type/" + activeTab, {
                 headers: { Authorization: "Bearer " + authData.token },
             })
             .then((res) => setList(res.data.result))

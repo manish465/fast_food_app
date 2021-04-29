@@ -1,9 +1,9 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
-import { url } from "../adapter";
 import { useForm } from "react-hook-form";
 import { useHistory } from "react-router-dom";
 import styled from "styled-components";
+
 import {
     FlexColoumn,
     Padding,
@@ -13,7 +13,6 @@ import {
     FlexRow,
     ChangePage,
 } from "../styles";
-
 import deafultIMG from "../assets/images/profile.jpg";
 
 const MainContainer = styled.div`
@@ -88,7 +87,7 @@ const SignUp = () => {
         data.append("picture", profilePicture[0]);
 
         axios
-            .post(url + "users/sign-up", data)
+            .post("/users/sign-up", data)
             .then(() => {
                 history.push("/sign-in");
             })

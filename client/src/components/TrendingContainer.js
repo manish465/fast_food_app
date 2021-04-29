@@ -3,7 +3,6 @@ import axios from "axios";
 import styled from "styled-components";
 
 import { PrimaryCard } from "./";
-import { url } from "../adapter";
 import { userContext } from "../context/auth";
 
 const Container = styled.div`
@@ -27,7 +26,7 @@ const TrendingContainer = () => {
 
     useEffect(() => {
         axios
-            .get(url + "item/trending", {
+            .get("/item/trending", {
                 headers: { Authorization: "Bearer " + authData.token },
             })
             .then((res) => setList(res.data.result))

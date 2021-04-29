@@ -93,7 +93,7 @@ const AddProduct = () => {
         data.append("price", getValues("price"));
 
         axios
-            .post(url + "item/add", data, {
+            .post("/item/add", data, {
                 headers: {
                     Authorization:
                         "Bearer " +
