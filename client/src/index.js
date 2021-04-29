@@ -7,15 +7,18 @@ import { ThemeProvider } from "styled-components";
 import { GlobalStyle, theme } from "./styles";
 
 import UserContext from "./context/auth";
+import ProductContext from "./context/product";
 
 ReactDOM.render(
     <ThemeProvider theme={theme}>
         <GlobalStyle />
-        <UserContext>
-            <Router>
-                <App />
-            </Router>
-        </UserContext>
+        <ProductContext>
+            <UserContext>
+                <Router>
+                    <App />
+                </Router>
+            </UserContext>
+        </ProductContext>
     </ThemeProvider>,
     document.getElementById("root"),
 );

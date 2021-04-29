@@ -1,8 +1,10 @@
+import { useContext } from "react";
 import styled from "styled-components";
 
 import { FlexColoumn } from "../styles";
 import { ChangePage } from "../styles";
 import { picturebase } from "../adapter";
+import { productContext } from "../context/product";
 
 const ContainerCard = styled.div`
     width: 400px;
@@ -58,6 +60,21 @@ const ContainerCardButton = styled.button`
 `;
 
 const PrimaryCard = ({ _id, main_pic, name, price, restaurant }) => {
+    const { productList, setProductList } = useContext(productContext);
+
+    const handelAddProductToCart = (id) => {
+        const idExists = productList.find((product) => product.id === id);
+        idExists
+            ? setProductList((prev) =>
+                  prev.map((item) =>
+                      item.id === id
+                          ? { ...idExists, multiple: item.multiple + 1 }
+                          : item,
+                  ),
+              )
+            : setProductList((prev) => [...prev, { id, multiple: 1 }]);
+    };
+
     return (
         <ContainerCard>
             <ChangePage to={"/product/" + _id}>
@@ -69,7 +86,10 @@ const PrimaryCard = ({ _id, main_pic, name, price, restaurant }) => {
                     From {restaurant}
                 </ContainerCardRestaurantName>
                 <ContainerCardPrice>${price}</ContainerCardPrice>
-                <ContainerCardButton>ADD</ContainerCardButton>
+                <ContainerCardButton
+                    onClick={() => handelAddProductToCart(_id)}>
+                    ADD
+                </ContainerCardButton>
             </FlexColoumn>
         </ContainerCard>
     );

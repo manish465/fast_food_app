@@ -7,6 +7,7 @@ import { NavBar } from "../components";
 import { Padding, SizedBox } from "../styles";
 import { userContext } from "../context/auth";
 import { url, picturebase } from "../adapter";
+import { productContext } from "../context/product";
 
 const Coloumn = styled.div`
     display: flex;
@@ -68,6 +69,7 @@ const ProductButton = styled.button`
 const SingleProduct = () => {
     const { id } = useParams();
     const { authData } = useContext(userContext);
+    const { productList, setProductList } = useContext(productContext);
 
     const [data, setData] = useState(null);
 
@@ -79,6 +81,19 @@ const SingleProduct = () => {
             .then((res) => setData(res.data.result))
             .catch((err) => console.log(err));
     }, [authData.token, id]);
+
+    const handelAddProductToCart = (id) => {
+        const idExists = productList.find((product) => product.id === id);
+        idExists
+            ? setProductList((prev) =>
+                  prev.map((item) =>
+                      item.id === id
+                          ? { ...idExists, multiple: item.multiple + 1 }
+                          : item,
+                  ),
+              )
+            : setProductList((prev) => [...prev, { id, multiple: 1 }]);
+    };
 
     return (
         <>
@@ -100,7 +115,9 @@ const SingleProduct = () => {
                         ${data ? data.price : "Loading..."}
                     </ProductPrice>
                     <SizedBox height='15px' />
-                    <ProductButton>ADD</ProductButton>
+                    <ProductButton onClick={() => handelAddProductToCart(id)}>
+                        ADD
+                    </ProductButton>
                     <SizedBox height='15px' />
                     <ProductDescription>
                         {data ? data.description : "Loading..."}
