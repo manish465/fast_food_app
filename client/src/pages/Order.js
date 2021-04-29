@@ -1,8 +1,10 @@
+import { useContext } from "react";
 import styled from "styled-components";
+import axios from "axios";
+
 import { NavBar } from "../components";
 import { FlexColoumn, Padding, SizedBox } from "../styles";
 import { del } from "../assets/svg";
-
 import deafultIMG from "../assets/images/fast-food.jpg";
 import { useState } from "react";
 

@@ -62,17 +62,17 @@ const ContainerCardButton = styled.button`
 const PrimaryCard = ({ _id, main_pic, name, price, restaurant }) => {
     const { productList, setProductList } = useContext(productContext);
 
-    const handelAddProductToCart = (id) => {
-        const idExists = productList.find((product) => product.id === id);
+    const handelAddProductToCart = (product) => {
+        const idExists = productList.find((item) => item.id === product.id);
         idExists
             ? setProductList((prev) =>
                   prev.map((item) =>
-                      item.id === id
+                      item.id === product.id
                           ? { ...idExists, multiple: item.multiple + 1 }
                           : item,
                   ),
               )
-            : setProductList((prev) => [...prev, { id, multiple: 1 }]);
+            : setProductList((prev) => [...prev, { ...product, multiple: 1 }]);
     };
 
     return (
@@ -87,7 +87,14 @@ const PrimaryCard = ({ _id, main_pic, name, price, restaurant }) => {
                 </ContainerCardRestaurantName>
                 <ContainerCardPrice>${price}</ContainerCardPrice>
                 <ContainerCardButton
-                    onClick={() => handelAddProductToCart(_id)}>
+                    onClick={() =>
+                        handelAddProductToCart({
+                            img: main_pic,
+                            title: name,
+                            price: price,
+                            id: _id,
+                        })
+                    }>
                     ADD
                 </ContainerCardButton>
             </FlexColoumn>

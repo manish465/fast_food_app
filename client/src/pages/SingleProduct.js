@@ -82,17 +82,17 @@ const SingleProduct = () => {
             .catch((err) => console.log(err));
     }, [authData.token, id]);
 
-    const handelAddProductToCart = (id) => {
-        const idExists = productList.find((product) => product.id === id);
+    const handelAddProductToCart = (product) => {
+        const idExists = productList.find((item) => item.id === product.id);
         idExists
             ? setProductList((prev) =>
                   prev.map((item) =>
-                      item.id === id
+                      item.id === product.id
                           ? { ...idExists, multiple: item.multiple + 1 }
                           : item,
                   ),
               )
-            : setProductList((prev) => [...prev, { id, multiple: 1 }]);
+            : setProductList((prev) => [...prev, { ...product, multiple: 1 }]);
     };
 
     return (
@@ -115,7 +115,15 @@ const SingleProduct = () => {
                         ${data ? data.price : "Loading..."}
                     </ProductPrice>
                     <SizedBox height='15px' />
-                    <ProductButton onClick={() => handelAddProductToCart(id)}>
+                    <ProductButton
+                        onClick={() =>
+                            handelAddProductToCart({
+                                img: data.main_pic,
+                                title: data.name,
+                                price: data.price,
+                                id,
+                            })
+                        }>
                         ADD
                     </ProductButton>
                     <SizedBox height='15px' />
