@@ -1,9 +1,8 @@
 import { useState, useEffect, useContext } from "react";
 import axios from "axios";
+import styled from "styled-components";
 
 import { NavBar, Pane } from "../components";
-import styled from "styled-components";
-import { url } from "../adapter";
 import { userContext } from "../context/auth";
 
 const Tabs = styled.div`

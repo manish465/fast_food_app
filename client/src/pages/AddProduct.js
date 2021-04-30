@@ -7,7 +7,6 @@ import { useHistory } from "react-router-dom";
 import { NavBar } from "../components";
 import { FlexColoumn, Padding, TextBox, SizedBox } from "../styles";
 import deafultIMG from "../assets/images/fast-food.jpg";
-import { url } from "../adapter";
 
 const MainContainer = styled.div`
     background-color: ${({ theme }) => theme.colors.secondaryColor};
